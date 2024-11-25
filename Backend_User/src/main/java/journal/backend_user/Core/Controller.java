@@ -1,0 +1,45 @@
+package journal.backend_user.Core;
+
+import journal.backend_user.Core.Model.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
+public class Controller {
+    @Autowired
+    private UserService userService;
+
+    public Controller() {
+    }
+
+    @PostMapping("/sign_up")
+    public ResponseEntity<Void> createUser(@RequestBody User user) {
+        try {
+            userService.createUser(user);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/find_user")
+    public ResponseEntity<Boolean> userExists(@RequestParam String id) {
+        try {
+            boolean userExists = userService.userByIdExists(id);
+            return ResponseEntity.ok(userExists);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PostMapping("/sign_in")
+    public ResponseEntity<User> getUser(@RequestBody User user) {
+        try {
+            return ResponseEntity.ok(userService.getUser(user));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+}
