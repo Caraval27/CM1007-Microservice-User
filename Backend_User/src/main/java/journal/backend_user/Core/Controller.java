@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8081"})
 @RestController
 public class Controller {
     @Autowired
@@ -38,6 +38,16 @@ public class Controller {
     public ResponseEntity<User> getUser(@RequestBody User user) {
         try {
             return ResponseEntity.ok(userService.getUser(user));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/get_user_by_id")
+    public ResponseEntity<User> getUserById(@RequestParam String id) {
+        try {
+            User user = userService.getUserById(id);
+            return ResponseEntity.ok(user);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
