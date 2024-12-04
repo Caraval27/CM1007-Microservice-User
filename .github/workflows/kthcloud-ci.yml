@@ -17,7 +17,5 @@ jobs:
             - name: Build and push
               uses: docker/build-push-action@v5
               with:
-                context: ./Backend_User
-                file: ./Backend_User/Dockerfile
                 push: true
                 tags: ${{ secrets.DOCKER_TAG }}
