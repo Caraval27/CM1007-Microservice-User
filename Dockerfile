@@ -1,8 +1,13 @@
+FROM maven:3.8.4-openjdk-17 AS build
+WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
+
 FROM openjdk:17-jdk-alpine
 WORKDIR /journal_app
 EXPOSE 8080
 
-COPY Backend_User/target/*.jar /journal_app/
+COPY --from=build /app/Backend_User/target/*.jar /journal_app/
 
 ENV SPRING_DATASOURCE_PASSWORD=admin
 ENV SPRING_DATASOURCE_USERNAME=admin
