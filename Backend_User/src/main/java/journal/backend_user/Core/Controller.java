@@ -5,7 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8081", "https://journal-app-frontend.app.cloud.cbh.kth.se"})
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8081",
+        "https://journal-app-frontend.app.cloud.cbh.kth.se:3000", "https://journal-app-message.app.cloud.cbh.kth.se:8081"})
 @RestController
 public class Controller {
     @Autowired
