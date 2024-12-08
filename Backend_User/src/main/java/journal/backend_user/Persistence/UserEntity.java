@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import journal.backend_user.Core.Authority;
 
 @Entity
-@Table(name = "T_User")
+@Table(name = "t_user")
 public class UserEntity {
     @Id
     @Column(name = "id", nullable = false)
