@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8081", "http://journal-app-frontend.app.cloud.cbh.kth.se"})
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:8081", "https://journal-app-frontend.app.cloud.cbh.kth.se"})
 @RestController
 public class Controller {
     @Autowired
@@ -20,6 +20,7 @@ public class Controller {
             userService.createUser(user);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.badRequest().build();
         }
     }
@@ -30,6 +31,7 @@ public class Controller {
             boolean userExists = userService.userByIdExists(id);
             return ResponseEntity.ok(userExists);
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.badRequest().build();
         }
     }
@@ -39,6 +41,7 @@ public class Controller {
         try {
             return ResponseEntity.ok(userService.getUser(user));
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.badRequest().build();
         }
     }
@@ -49,6 +52,7 @@ public class Controller {
             User user = userService.getUserById(id);
             return ResponseEntity.ok(user);
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.badRequest().build();
         }
     }
